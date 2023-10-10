@@ -1,3 +1,4 @@
 Simulationsende: 0s
-Anzahl Kunden: 0
+Anzahl Kunden: 40
 Anzahl vollständige Einkäufe 0
+Mittlere Einkaufsdauer 0.00s

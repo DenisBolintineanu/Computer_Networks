@@ -1,0 +1,4 @@
+End of simulation: 0s
+Total customers: 40
+Total complete shopping: 0
+Average shopping duration: 0.00s

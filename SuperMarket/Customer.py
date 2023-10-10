@@ -16,4 +16,3 @@ class Customer:
 
     def run(self):
         pass
-

@@ -6,10 +6,12 @@ class EventQueue:
     queue = []
     heapq.heapify(queue)
 
-    def push(self, event):
-        heapq.heappush(self.queue, event)
+    @staticmethod
+    def push(event):
+        heapq.heappush(EventQueue.queue, event)
 
-    def start(self):
+    @staticmethod
+    def start():
         pass
 
 
@@ -21,4 +23,3 @@ class EventQueue:
 # buffer: customer queue
 # delay_per_item: service time
 # CustomerWaiting, busy: possible states of this station
-
