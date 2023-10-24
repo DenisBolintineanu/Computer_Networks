@@ -17,9 +17,3 @@ class Event:
         if self.counter < other.counter:
             return True
         return False
-
-# class consists of
-# q: event queue
-# time: current time
-# evCount: counter of all popped events
-# methods push, pop, and start as described in the problem description

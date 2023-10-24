@@ -12,14 +12,9 @@ class EventQueue:
 
     @staticmethod
     def start():
-        pass
-
-
-# please implement here
-
-
-# class consists of
-# name: station name
-# buffer: customer queue
-# delay_per_item: service time
-# CustomerWaiting, busy: possible states of this station
+        for i in EventQueue.queue:
+            event = heapq.heappop(EventQueue.queue)
+            if event.args == ():
+                event.work()
+            else:
+                event.work(event.args)
