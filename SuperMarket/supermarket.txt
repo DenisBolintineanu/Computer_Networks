@@ -1,9 +1,9 @@
 End of simulation: 0s
 Total customers: 40
-Total complete shopping: 0
-Average shopping duration: 3.75s
-Average shopping duration (complete): 3.75s
-Drop percentage at Baker: 3.75
-Drop percentage at Butcher: 3.75
-Drop percentage at Cheese: 3.75
-Drop percentage at Cashier: 3.75
+Total complete shopping: 23
+Average shopping duration: 732.62s
+Average shopping duration (complete): 989.78s
+Drop percentage at Baker: 0.00
+Drop percentage at Butcher: 0.00
+Drop percentage at Cheese: 0.00
+Drop percentage at Cashier: 29.82

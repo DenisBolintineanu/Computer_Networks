@@ -3,7 +3,8 @@ from Event import Event
 from EventQueue import EventQueue
 from Station import Station
 
-with open("supermarket.txt", "w") as f, open("supermarket_customer.txt", "w") as fc, open("supermarket_station.txt","w") as fs:
+with open("supermarket.txt", "w") as f, open("supermarket_customer.txt", "w") as fc, open("supermarket_station.txt",
+                                                                                          "w") as fs:
     # print on console and into supermarket log
     def my_print(msg):
         print(msg)
@@ -24,7 +25,7 @@ with open("supermarket.txt", "w") as f, open("supermarket_customer.txt", "w") as
     # name: customer name
     def my_print2(s, msg, name):
         t = EventQueue.time
-        print(str(round(t,4))+':'+s+' '+msg)
+        print(str(round(t, 4)) + ':' + s + ' ' + msg)
         fs.write(str(round(t, 4)) + ':' + s + ' ' + msg + ' ' + name + '\n')
 
 
@@ -57,11 +58,11 @@ with open("supermarket.txt", "w") as f, open("supermarket_customer.txt", "w") as
         my_print('Total complete shopping: %i' % Customer.complete)
         x = Customer.duration / Customer.count
         my_print('Average shopping duration: %.2fs' % x)
-        #x = Customer.duration_cond_complete / Customer.complete
+        x = Customer.duration_cond_complete / Customer.complete
         my_print('Average shopping duration (complete): %.2fs' % x)
         S = ('Baker', 'Butcher', 'Cheese', 'Cashier')
         for s in S:
-           # x = Customer.dropped[s] / (Customer.served[s] + Customer.dropped[s]) * 100
+            x = Customer.dropped[s] / (Customer.served[s] + Customer.dropped[s]) * 100
             my_print('Drop percentage at %s: %.2f' % (s, x))
 
         f.close()

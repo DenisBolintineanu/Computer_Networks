@@ -21,27 +21,28 @@ class Customer:
         self.total_time = 0
 
     def run(self):
-        if len(self.list) > 1:
+        self.actual_task = self.list.pop(0)
+        t = self.start_time + self.actual_task[0]
+        EventQueue.push(Event(t, self.arrive_station, t, 2))
+
+    def arrive_station(self, t):
+        self.actual_task[1].queue(self.actual_task[2])
+        if self.actual_task[1].customers > self.actual_task[3]:
+            self.leave_station(t)
+            self.dropped[self.actual_task[1].name] += 1
+            self.complete = False
+        else:
+            EventQueue.push(Event(t + self.actual_task[1].waiting_time, self.leave_station, t + self.actual_task[1].waiting_time, 1))
+            self.total_time += self.actual_task[1].waiting_time
+            self.served[self.actual_task[1].name] += 1
+
+    def leave_station(self, t):
+        self.actual_task[1].dequeue(self.actual_task[2])
+        if self.list:
             self.actual_task = self.list.pop(0)
-            t = self.start_time + self.actual_task[0]
-            EventQueue.push(Event(t, self.arrive_station, t, 2))
+            EventQueue.push(Event(t + self.actual_task[0], self.arrive_station, t + self.actual_task[0], 2))
         else:
             Customer.duration += self.total_time
             if self.complete:
                 Customer.complete += 1
                 Customer.duration_cond_complete += self.total_time
-
-    def arrive_station(self, t):
-        self.actual_task[1].queue(self.actual_task[0])
-        if self.actual_task[1].customers > self.actual_task[3]:
-            self.leave_station()
-            self.dropped[self.actual_task[1].name] += 1
-            self.complete = False
-        else:
-            EventQueue.push(Event(t + self.actual_task[1].waiting_time, self.leave_station, (), 1))
-            self.total_time += self.actual_task[1].waiting_time
-            self.served[self.actual_task[1].name] += 1
-
-
-    def leave_station(self):
-        self.run()

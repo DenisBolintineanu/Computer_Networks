@@ -12,7 +12,7 @@ class EventQueue:
 
     @staticmethod
     def start():
-        for i in EventQueue.queue:
+        while EventQueue.queue:
             event = heapq.heappop(EventQueue.queue)
             if event.args == ():
                 event.work()
