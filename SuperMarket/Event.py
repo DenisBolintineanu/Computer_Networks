@@ -12,7 +12,7 @@ class Event:
     def __lt__(self, other):
         if self.t < other.t:
             return True
-        if self.prio < other.prio:
+        if self.prio > other.prio:
             return True
         if self.counter < other.counter:
             return True
