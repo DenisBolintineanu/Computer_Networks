@@ -1,5 +1,8 @@
+import time
+
 from EventQueue import EventQueue
 from Event import Event
+import threading
 
 
 class Customer:
@@ -19,17 +22,23 @@ class Customer:
         self.actual_task = None
         self.complete = True
         self.total_time = 0
+        self.thread = threading.Thread(target=Customer.go_to_station)
+        self.condition = threading.Condition
 
     def run(self):
+        self.thread.run()
+
+    def go_to_station(self):
         self.actual_task = self.list.pop(0)
-        t = self.start_time + self.actual_task[0]
-        EventQueue.push(Event(t, self.arrive_station, t, 2))
+        time.sleep(self.actual_task[0])
+        self.arrive_station(0)
+
 
     def arrive_station(self, t):
         self.actual_task[1].queue(self.actual_task[2])
-        if self.actual_task[1].customers > self.actual_task[3]:
-            self.leave_station(t)
+        if self.actual_task[1].customers >= self.actual_task[3]:
             self.dropped[self.actual_task[1].name] += 1
+            self.leave_station(t)
             self.complete = False
         else:
             EventQueue.push(Event(t + self.actual_task[1].waiting_time, self.leave_station, t + self.actual_task[1].waiting_time, 1))
