@@ -1,5 +1,4 @@
 from Customer import Customer
-from Event import Event
 from EventQueue import EventQueue
 from Station import Station
 import pandas as pd
@@ -33,14 +32,12 @@ with open("supermarket.txt", "w") as f, open("supermarket_customer.txt", "w") as
         while t < mT:
             customer = Customer(list(shopping_list), name + str(i), t)
             customer.run()
-            print("customer createt    " + str(i))
             i += 1
             t += dT
             time.sleep(dT)
 
 
     def start_purchase(time=30 * 60 + 1, interval_A=200, interval_B=60):
-        evQ = EventQueue()
         baker = Station(10, 'Baker')
         butcher = Station(30, 'Butcher')
         cheese = Station(60, 'Cheese')
@@ -51,8 +48,8 @@ with open("supermarket.txt", "w") as f, open("supermarket_customer.txt", "w") as
         shopping_list2 = [(30, butcher, 2, 5), (30, cashier, 3, 20), (20, baker, 3, 20)]
         threading.Thread(target=startCustomers, args=(shopping_list1, 'A', 0, interval_A, time)).start()
         threading.Thread(target=startCustomers, args=(shopping_list2, 'B', 1, interval_B, time)).start()
-        evQ.start()
 
+        """"
         return pd.DataFrame(
             {
                 'Values': [
@@ -69,14 +66,17 @@ with open("supermarket.txt", "w") as f, open("supermarket_customer.txt", "w") as
             },
             index=METRICS
         )
+        """
 
 
     if __name__ == "__main__":
         x = start_purchase()
-        print(x.loc['Average shopping duration'])
-        for metric in METRICS:
-            value = x.loc[metric].iloc[0]
-            if 'duration' in metric:
-                my_print(f'{metric}: {value:.2f}s')
-            else:
-                my_print(f'{metric}: {int(value)}')
+        """"
+            print(x.loc['Average shopping duration'])
+            for metric in METRICS:
+                value = x.loc[metric].iloc[0]
+                if 'duration' in metric:
+                    my_print(f'{metric}: {value:.2f}s')
+                else:
+                    my_print(f'{metric}: {int(value)}')
+        """

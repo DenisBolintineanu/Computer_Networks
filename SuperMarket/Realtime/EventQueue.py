@@ -3,19 +3,13 @@ import heapq
 
 class EventQueue:
     time = 0
-    queue = []
-    heapq.heapify(queue)
 
-    @staticmethod
-    def push(event):
-        heapq.heappush(EventQueue.queue, event)
+    def __init__(self):
+        self.queue = []
+        heapq.heapify(self.queue)
 
-    @staticmethod
-    def start():
-        while EventQueue.queue:
-            event = heapq.heappop(EventQueue.queue)
-            EventQueue.time = event.t
-            if event.args == ():
-                event.work()
-            else:
-                event.work(event.args)
+    def push(self, event):
+        heapq.heappush(self.queue, event)
+
+    def pop(self):
+        return heapq.heappop(self.queue)
