@@ -1,7 +1,6 @@
 from Customer import Customer
 from EventQueue import EventQueue
 from Station import Station
-import pandas as pd
 import threading
 import time
 
@@ -30,24 +29,27 @@ with open("supermarket.txt", "w") as f, open("supermarket_customer.txt", "w") as
         t = sT
         time.sleep(sT)
         while t < mT:
+            print("created new Customer:" + str(Customer.count))
             customer = Customer(list(shopping_list), name + str(i), t)
-            customer.run()
+            #customer.run()
             i += 1
             t += dT
             time.sleep(dT)
 
 
-    def start_purchase(time=30 * 60 + 1, interval_A=200, interval_B=60):
+    def start_purchase(timeEnd=30 * 60 + 1, interval_A=200, interval_B=60):
+        Customer.start_time_clock = time.time()
         baker = Station(10, 'Baker')
         butcher = Station(30, 'Butcher')
         cheese = Station(60, 'Cheese')
         cashier = Station(5, 'Cashier')
+
         Customer.served = {'Baker': 0, 'Butcher': 0, 'Cheese': 0, 'Cashier': 0}
         Customer.dropped = {'Baker': 0, 'Butcher': 0, 'Cheese': 0, 'Cashier': 0}
         shopping_list1 = [(10, baker, 10, 10), (30, butcher, 5, 10), (45, cheese, 3, 5), (60, cashier, 30, 20)]
         shopping_list2 = [(30, butcher, 2, 5), (30, cashier, 3, 20), (20, baker, 3, 20)]
-        threading.Thread(target=startCustomers, args=(shopping_list1, 'A', 0, interval_A, time)).start()
-        threading.Thread(target=startCustomers, args=(shopping_list2, 'B', 1, interval_B, time)).start()
+        threading.Thread(target=startCustomers, args=(shopping_list1, 'A', 0, interval_A, timeEnd)).start()
+        threading.Thread(target=startCustomers, args=(shopping_list2, 'B', 1, interval_B, timeEnd)).start()
 
         """"
         return pd.DataFrame(

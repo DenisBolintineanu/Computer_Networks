@@ -1,12 +1,13 @@
 class Event:
     counter = 0
 
-    def __init__(self, t, work, args=(), prio=255):
+    def __init__(self, customer, t, work, args=(), prio=255):
         self.t = t
         self.n = Event.counter
         self.work = work
         self.args = args
         self.prio = prio
+        self.customer = customer
         Event.counter += 1
 
     def __lt__(self, other):
