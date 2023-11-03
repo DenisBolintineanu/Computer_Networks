@@ -14,6 +14,7 @@ class EventQueue:
     def start():
         while EventQueue.queue:
             event = heapq.heappop(EventQueue.queue)
+            EventQueue.time = event.t
             if event.args == ():
                 event.work()
             else:
