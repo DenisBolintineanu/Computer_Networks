@@ -1,0 +1,35 @@
+3. Fragen
+Nachdem wir einen ersten Einblick in WireShark gewonnen haben, ein paar Fragen: 
+1. Nennen Sie mindestens 5 Protokolle, die WireShark erkannt hat.
+    1.HTTP
+    2.TCP
+    3.UDP
+    4.QUIC
+    5.TLSv1.2 (v1.3)
+2. Wie lange hat es vom Senden des HTTP Requests (http://gaia.cs.umass.edu/wireshark-labs/
+INTRO-wireshark-file1.html) bis zum Erhalt der HTTP Response gedauert?
+
+    [Time since first frame in this TCP stream: 0.103722000 seconds]
+    [Time since previous frame in this TCP stream: 0.000463000 seconds]
+
+3. Was ist die Internet-Adresse ihres Rechners? Was ist die Ethernet-Adresse (MAC-Adresse, 
+physikalische Adresse) ihres Rechners? Welches ist die Ziel-MAC-Adresse, zu der ihr Rechner 
+Pakete sendet? Vergleichen Sie die Ziel-MAC-Adresse für verschiedene Ziel-IP-Adressen. 
+Welchem Netzknoten können Sie die Ziel-MAC-Adresse zuordnen?
+
+    IP Adresse: 192.168.178.88
+
+    Quell-MAC-Adresse: e0:d4:64:3d:6d:96
+    Ziel-MAC-Adresse: 34:81:c4:f3:0c:c5
+
+
+
+4. Betrachten Sie ein HTTP Paket. Welche weiteren Protokolle werden genutzt, um ein http Paket zu 
+übertragen? Welchen Schichten des TCP/IP-Schichtenmodells können Sie die Pakete zuordnen?
+
+    Ethernet    Link
+    IP          Network
+    TCP         Transport
+    HTTP        Application
+
+
