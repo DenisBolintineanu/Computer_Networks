@@ -1,0 +1,9 @@
+End of simulation: 3710034
+Total customers: 35
+Total complete shopping: 35
+Average shopping duration: 2010000.00s
+Average shopping duration (complete): 2010000.00s
+Drop percentage at Baker: 0
+Drop percentage at Butcher: 0
+Drop percentage at Cheese: 0
+Drop percentage at Cashier: 0
