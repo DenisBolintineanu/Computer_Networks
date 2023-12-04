@@ -1,7 +1,6 @@
 from EventQueue import EventQueue
 from Event import Event
 
-
 class Customer:
     served = dict()
     dropped = dict()
