@@ -14,7 +14,7 @@ encoded_password = base64.b64encode(password.encode()).decode()
 
 # Email details
 from_address = "de391bol@htwg-konstanz.de"
-to_address = "robin.stockinger@gmx.de"
+to_address = "example.example.com"
 subject = "Subject: Test Email from Python\n"
 message = "This is a test email sent from a Python script."
 
