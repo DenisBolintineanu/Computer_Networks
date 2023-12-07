@@ -6,28 +6,36 @@ def pack_message(id, operation, numbers):
     numbers_format = '!' + 'i' * len(numbers)
     return struct.pack('!I', id) + struct.pack('!B', len(operation_encoded)) + operation_encoded + struct.pack(numbers_format, *numbers)
 
-Server_IP = '127.0.0.1'
+#Server_IP = '127.0.0.1'
+#Server_PORT = 50000
+
+Server_IP = '141.37.206.23'
 Server_PORT = 50000
 
-# Beispielnachricht
-id = 1
-operation = "Produkt"  # Kann "Summe", "Produkt", "Minimum" oder "Maximum" sein
-numbers = [1, 2, 3, 4, 5]  # Liste der Zahlen
 
-# Nachricht packen
+# Example message
+id = 1
+operation = "Product"  # Can be "Sum", "Product", "Minimum" or "Maximum"
+numbers = [1, 2, 3, 4, 5]  # List of numbers
+
+# Pack message
 message = pack_message(id, operation, numbers)
 
-# Verbindung herstellen
+# Establish connection
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#sock.bind((Server_IP, 40000))
 sock.connect((Server_IP, Server_PORT))
+local_ip, local_port = sock.getsockname()
+print(f'Local IP: {local_ip}, Local Port: {local_port}')
 
-# Nachricht senden
-sock.send(message)
-print(f'Nachricht gesendet: ID={id}, Operation={operation}, Zahlen={numbers}')
 
-# Antwort empfangen
-data = sock.recv(1024)
+# Send message
+sock.send(message) # Send message
+print(f'Message sent: ID={id}, Operation={operation}, Numbers={numbers}')
+
+# Receive response
+data = sock.recv(1024) # Blocking call
 received_id, result = struct.unpack('!Ii', data)
-print(f'Antwort erhalten: ID={received_id}, Ergebnis={result}')
+print(f'Response received: ID={received_id}, Result={result}')
 
 sock.close()
