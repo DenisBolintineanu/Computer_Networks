@@ -50,13 +50,37 @@ socket.setdefaulttimeout(5) # Set timeout to 5 seconds for all sockets
 sock.listen(1)
 print(f'Listening on Port {My_PORT} for incoming TCP connections')
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> dec1b1f2b30b7eadc1e8b21a01a39150a4216389
 while True:
     try:
         conn, addr = sock.accept() # Blocking call
         print(f'Incoming connection accepted: {addr}')
+<<<<<<< HEAD
         threading.Thread(target=hanle_client_request, args=(conn, addr)).start()
+=======
+
+        while True:
+            data = conn.recv(1024)
+            if not data:
+                print('Connection closed from other side')
+                conn.close()
+                break
+
+            # Unpack and calculate
+            id, = struct.unpack('!I', data[:4])
+            operation_len = data[4]
+            operation = data[5:5 + operation_len].decode('utf-8')
+            numbers = struct.unpack('!' + 'i' * ((len(data) - 5 - operation_len) // 4), data[5 + operation_len:])
+
+            result = calculate(operation, numbers)
+            response = struct.pack('!Ii', id, result)
+            conn.send(response)
+
+>>>>>>> dec1b1f2b30b7eadc1e8b21a01a39150a4216389
     except socket.timeout:
         print(f'Socket timed out at {time.asctime()}')
 
